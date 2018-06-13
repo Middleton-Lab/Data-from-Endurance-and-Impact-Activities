@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/137121847.svg)](https://zenodo.org/badge/latestdoi/137121847)
+
 # Data-from-Endurance-and-Impact-Activities
 
 Data from "Endurance and impact activities differentially influence femoral cross-sectional geometry and mineral apposition"
