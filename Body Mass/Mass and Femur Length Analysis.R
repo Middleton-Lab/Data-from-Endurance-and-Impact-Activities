@@ -1,18 +1,17 @@
+library(tidyverse)
 library(readxl)
 library(ggplot2)
-library(dplyr)
 library(reshape2)
-library(nlme)
-library(car)
 library(ggsci)
 library(rstanarm)
 library(rethinking)
-library(tidyr)
-library(tidyverse)
 library(latex2exp)
-library(multcomp)
-library(lsmeans)
 library(cowplot)
+
+iter <- 2.5e4
+warmup <- 5e3
+chains <- 4
+cores <- 4
 
 smallest_HPDI <- function(x) {
   min_interval <- 0.01
@@ -36,7 +35,8 @@ my_theme <- theme(
   strip.text = element_text(size = font_size - 1)
 )
 
-M <- read_excel("MDII_ICR measurements.xlsx", na = "NA")
+M <- read_excel("MDII_ICR measurements.xlsx", na = "NA") %>% 
+  as.data.frame()
 
 # Drop mice 7 & 34, which were euthanized prior to the end of the
 # experiment
@@ -158,8 +158,8 @@ fm_mass_stan <-
       sigma ~ dcauchy(0, 2)
     ),
     data = M_b,
-    iter = 1.1e4,
-    warmup = 1e3,
+    iter = iter,
+    warmup = warmup,
     WAIC = FALSE
   )
 
